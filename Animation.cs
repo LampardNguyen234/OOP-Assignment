@@ -18,19 +18,26 @@ namespace TD
         float timer, interval;
         bool isVisible;
 
-        //Constructor
-        public Animation(Vector2 newPosition)
+        public bool IsVisible
         {
+            get { return isVisible; }
+            set { isVisible = value; }
+        }
+
+        //Constructor
+        public Animation(Vector2 newPosition, Texture2D animationTexture)
+        {
+            this.animationTexture = animationTexture;
             currentFrameX = 0;
             currentFrameY = 0;
             position = newPosition;
             origin = new Vector2(0, 0);
-            //sourRec = new Rectangle(0,0,0,0) ;
+            sourRec = new Rectangle(0, 0, Container.animationWidth, Container.animationHeight);
             animationTexture = null;
             width = Container.animationWidth;
             height = Container.animationHeight;
             timer = 0f;
-            interval = 100f;
+            interval = 50f;
             isVisible = true;
         }
 

@@ -15,10 +15,10 @@ namespace TD
         public static int scrHeight = 600;
         public static float PI= 3.14159265358979f;
 
-        public static int animationWidth = 100;
-        public static int animationHeight = 100;
-        public static int animationFrameXMax = 9;
-        public static int animationFrameYMax = 9;
+        public static int animationWidth = 64;
+        public static int animationHeight = 64;
+        public static int animationFrameXMax = 7;
+        public static int animationFrameYMax = 3;
 
         public static int enemyTextureSize = 50;
         public static int healthBarHeight = 5;

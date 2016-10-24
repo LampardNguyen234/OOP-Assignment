@@ -81,7 +81,7 @@ namespace TD
             Texture2D towerTexture = Content.Load<Texture2D>("tower__000");
             Texture2D baseTexture = Content.Load<Texture2D>("base");
             Texture2D bulletTexture = Content.Load<Texture2D>("bullet_00");
-            player = new Player(level, towerTexture,baseTexture, bulletTexture);
+            player = new Player(level, towerTexture,baseTexture, bulletTexture,animationTexture);
         }
 
         /// <summary>

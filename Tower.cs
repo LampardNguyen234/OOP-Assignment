@@ -21,7 +21,7 @@ namespace TD
         Vector2 center;
         Rectangle boudingBox;
         
-        Texture2D texture, baseTexture, bulletTexture;
+        Texture2D texture, baseTexture, bulletTexture, animationTexture;
         bool isAlive;
         float rotation;
         float radius;
@@ -50,8 +50,9 @@ namespace TD
         private float timer;
         private float interval;
 
-        public Tower(Texture2D texture, int level, Vector2 position, Texture2D baseTexture, Texture2D bulletTexture)
+        public Tower(Texture2D texture, int level, Vector2 position, Texture2D baseTexture, Texture2D bulletTexture, Texture2D animationTexture)
         {
+            this.animationTexture = animationTexture;
             this.baseTexture = baseTexture;
             this.texture = texture;
             isAlive = true;
@@ -68,6 +69,8 @@ namespace TD
             this.bulletTexture = bulletTexture;
             timer = 0f;
             interval = 200f;
+            animation = new Animation(position, animationTexture);
+            animation.IsVisible = false;
         }
 
         //Kiểm tra xem enemy có nằm trong bán kính không
@@ -110,6 +113,8 @@ namespace TD
         //Update
         public void Update(GameTime gameTime)
         {
+            if (animation.IsVisible)
+                animation.Update(gameTime);
             if (target != null)
                 if (target.isAlive == false)
                     target = null;
@@ -118,7 +123,7 @@ namespace TD
             {
                 if (target != null)
                 {
-                    Bullet bullet = new Bullet(position, level, bulletTexture);
+                    Bullet bullet = new Bullet(position, level, bulletTexture,animationTexture);
                     bulletList.Add(bullet);
                 }
                 timer = 0;
@@ -143,6 +148,14 @@ namespace TD
                     bulletList.Remove(bullet);
                     i--;
                 }
+                if (target != null)
+                {
+                    if (target.CurrentHealth<=0)
+                    {
+                        animation.IsVisible = true;
+                        animation = new Animation(target.Center, animationTexture);
+                    }
+                }
             }
             FaceTarget();
         }
@@ -160,15 +173,8 @@ namespace TD
                 if(CheckBulletOutOfTower(bullet))
                     bullet.Draw(spriteBatch);
             }
-            if(target!=null)
-            {
-                if(target.isAlive==false)
-                {
-                    animation = new Animation(target.Center);
-                    animation.Draw(spriteBatch);
-                }
-            }
-
+            if(animation.IsVisible)
+                animation.Draw(spriteBatch);
         }
 
         bool CheckBulletOutOfTower(Bullet bullet)

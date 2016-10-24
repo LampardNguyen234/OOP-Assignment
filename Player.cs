@@ -32,6 +32,7 @@ namespace TD
         private Texture2D towerTexture;
         private Texture2D bulletTexture;
         private Texture2D baseTexture;
+        private Texture2D animationTexture;
 
         private int cellX;
 
@@ -54,8 +55,9 @@ namespace TD
         #endregion
 
         #region Constructor
-        public Player(Level level,Texture2D towerTexture, Texture2D baseTexture, Texture2D bulletTexture)
+        public Player(Level level,Texture2D towerTexture, Texture2D baseTexture, Texture2D bulletTexture, Texture2D animationTexture)
         {
+            this.animationTexture = animationTexture;
             this.baseTexture = baseTexture;
             this.towerTexture = towerTexture;
             this.level = level;
@@ -98,7 +100,7 @@ namespace TD
             {
                 if (IsCellClear())
                 {
-                    Tower tower = new Tower(towerTexture, 1 , new Vector2(tileX, tileY), baseTexture, bulletTexture);
+                    Tower tower = new Tower(towerTexture, 1 , new Vector2(tileX, tileY), baseTexture, bulletTexture,animationTexture);
                     towerList.Add(tower);
                 }
             }

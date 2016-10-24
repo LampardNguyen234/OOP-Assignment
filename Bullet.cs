@@ -43,12 +43,12 @@ namespace TD
 
         #endregion
 
-        public Bullet(Vector2 position, int level, Texture2D bulletTexture)
+        public Bullet(Vector2 position, int level, Texture2D bulletTexture, Texture2D animationTexture)
         {
             texture = bulletTexture;
             this.position = position;
             this.level = level;
-            animation = new Animation(position);
+            animation = new Animation(position, animationTexture);
             this.speed = 10 * level;
             rotation = 0;
             age = 0;
